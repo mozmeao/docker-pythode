@@ -1,11 +1,3 @@
-FROM buildpack-deps:jessie
-
-# ensure local python is preferred over distribution python
-ENV PATH /usr/local/bin:$PATH
-
-# http://bugs.python.org/issue19846
-# > At the moment, setting "LANG=C" on a Linux system *fundamentally breaks Python 3*, and that's not OK.
-ENV LANG C.UTF-8
 
 # Extra python env
 ENV PYTHONDONTWRITEBYTECODE=1
@@ -19,10 +11,4 @@ ADD https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini.asc /
 RUN gpg --keyserver ha.pool.sks-keyservers.net --recv-keys 595E85A6B1B4779EA4DAAEC70B588DFF0527A9B7 \
  && gpg --verify /usr/local/bin/tini.asc
 RUN chmod +x /usr/local/bin/tini
-ENTRYPOINT ["/usr/local/bin/tini", "--"]
-
-# python runtime dependencies
-RUN apt-get update && apt-get install -y --no-install-recommends \
-		tcl \
-		tk \
-	&& rm -rf /var/lib/apt/lists/*
+ENTRYPOINT ["tini", "--"]

@@ -1,6 +1,9 @@
 # docker-pythode
 
-A Debian Jessie base image with official latest NodeJS 6.10, Tini, and either Python 2.7 or 3.6.
+Based on the [official `python:2.7-slim` and `python:3.6-slim` images](https://hub.docker.com/_/python/) respectively,
+then adds NodeJS 6.10 from the [official Dockerfile](https://github.com/nodejs/docker-node/blob/master/6.10/Dockerfile),
+[Tini](https://github.com/krallin/tini), and some useful env vars.
+
 
 ## Usage
 
