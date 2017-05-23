@@ -1,0 +1,20 @@
+#!/bin/bash -exo pipefail
+
+function build_image() {
+    py_version="$1"
+    cat Dockerfile.header Dockerfile.node-6.10 Dockerfile.python-${py_version} > Dockerfile.pythode-${py_version}
+    docker build --pull -t mozmeao/base:pythode-${py_version}-6.10 -f Dockerfile.pythode-${py_version} .
+}
+
+function push_image() {
+    py_version="$1"
+    docker push mozmeao/base:pythode-${py_version}-6.10
+}
+
+build_image 2.7
+build_image 3.6
+
+if [[ "$1" == "--push" ]]; then
+    push_image 2.7
+    push_image 3.6
+fi
