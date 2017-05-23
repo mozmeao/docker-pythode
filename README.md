@@ -4,6 +4,8 @@ Based on the [official `python:2.7-slim` and `python:3.6-slim` images](https://h
 then adds NodeJS 6.10 from the [official Dockerfile](https://github.com/nodejs/docker-node/blob/master/6.10/Dockerfile),
 [Tini](https://github.com/krallin/tini), and some useful env vars.
 
+Also includes an apt helper script called `apt-install`. It is a simple wrapper around the best way to use
+`apt-get install` within a Dockerfile. It will run an update, install, and clear the apt cache to keep image size small.
 
 ## Usage
 
@@ -11,6 +13,8 @@ A `Dockerfile` like the following should work for your app if you have both Node
 
 ```docker
 FROM mozmeao/base:pythode-3.6-6.10
+
+RUN apt-install libpq-dev postgresql-client
 
 WORKDIR /app
 ENV NODE_ENV production

@@ -13,5 +13,8 @@ RUN gpg --keyserver ha.pool.sks-keyservers.net --recv-keys 595E85A6B1B4779EA4DAA
 RUN chmod +x /usr/local/bin/tini
 ENTRYPOINT ["tini", "--"]
 
+# Add apt script
+COPY apt-install /usr/local/bin/
+
 # add non-priviledged user
 RUN adduser --uid 1000 --disabled-password --gecos '' --no-create-home webdev
