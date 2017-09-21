@@ -7,6 +7,10 @@ then adds NodeJS 6.11 from the [official Dockerfile](https://github.com/nodejs/d
 Also includes an apt helper script called `apt-install`. It is a simple wrapper around the best way to use
 `apt-get install` within a Dockerfile. It will run an update, install, and clear the apt cache to keep image size small.
 
+
+We also provide `mozmeao/base:python-2.7` and `mozmeao/base:python-3.6` that are just the official python-slim images with the
+same env vars set and convenience features added.
+
 ## Usage
 
 A `Dockerfile` like the following should work for your app if you have both NodeJS and Python requirements.

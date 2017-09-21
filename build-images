@@ -2,22 +2,26 @@
 
 set -exo pipefail
 
-function build_image() {
+function build_images() {
     py_version="$1"
     cat Dockerfile.python-${py_version} Dockerfile.node-6.11 Dockerfile.footer > Dockerfile
     docker build --pull -t mozmeao/base:pythode-${py_version}-6.11 .
     rm -f Dockerfile
+    cat Dockerfile.python-${py_version} Dockerfile.footer > Dockerfile
+    docker build --pull -t mozmeao/base:python-${py_version} .
+    rm -f Dockerfile
 }
 
-function push_image() {
+function push_images() {
     py_version="$1"
     docker push mozmeao/base:pythode-${py_version}-6.11
+    docker push mozmeao/base:python-${py_version}
 }
 
-build_image 2.7
-build_image 3.6
+build_images 2.7
+build_images 3.6
 
 if [[ "$1" == "--push" ]]; then
-    push_image 2.7
-    push_image 3.6
+    push_images 2.7
+    push_images 3.6
 fi
