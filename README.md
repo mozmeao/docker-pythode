@@ -1,7 +1,7 @@
 # docker-pythode
 
 Based on the [official `python:2.7-slim` and `python:3.6-slim` images](https://hub.docker.com/_/python/) respectively,
-then adds NodeJS 6.10 from the [official Dockerfile](https://github.com/nodejs/docker-node/blob/master/6.10/Dockerfile),
+then adds NodeJS 6.11 from the [official Dockerfile](https://github.com/nodejs/docker-node/blob/master/6.11/slim/Dockerfile),
 [Tini](https://github.com/krallin/tini), and some useful env vars.
 
 Also includes an apt helper script called `apt-install`. It is a simple wrapper around the best way to use
@@ -12,7 +12,7 @@ Also includes an apt helper script called `apt-install`. It is a simple wrapper 
 A `Dockerfile` like the following should work for your app if you have both NodeJS and Python requirements.
 
 ```docker
-FROM mozmeao/base:pythode-3.6-6.10
+FROM mozmeao/base:pythode-3.6-6.11
 
 RUN apt-install libpq-dev postgresql-client
 
@@ -20,7 +20,7 @@ WORKDIR /app
 ENV NODE_ENV production
 
 COPY ./package.json ./
-RUN npm install
+RUN  install
 
 COPY ./requirements.txt ./
 RUN pip install --no-cache-dir -r requirements.txt
