@@ -4,14 +4,14 @@ set -exo pipefail
 
 function build_image() {
     py_version="$1"
-    cat Dockerfile.python-${py_version} Dockerfile.node-6.10 Dockerfile.footer > Dockerfile
-    docker build --pull -t mozmeao/base:pythode-${py_version}-6.10 .
+    cat Dockerfile.python-${py_version} Dockerfile.node-6.11 Dockerfile.footer > Dockerfile
+    docker build --pull -t mozmeao/base:pythode-${py_version}-6.11 .
     rm -f Dockerfile
 }
 
 function push_image() {
     py_version="$1"
-    docker push mozmeao/base:pythode-${py_version}-6.10
+    docker push mozmeao/base:pythode-${py_version}-6.11
 }
 
 build_image 2.7
